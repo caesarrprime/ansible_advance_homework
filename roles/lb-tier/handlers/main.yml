@@ -1,2 +1,7 @@
 ---
 # handlers file for lb-tier
+
+- name: restart {{ inst_ha }}
+  service:
+   name: "{{ inst_ha }}"
+   state: restarted

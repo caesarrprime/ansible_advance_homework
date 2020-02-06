@@ -1,2 +1,21 @@
 ---
-# tasks file for lb-tier
+- name: Intall the require packages
+  package:
+   name: "{{ inst_ha }}"
+   state: latest
+
+- name: Start Load balancer at boot
+  service:
+   name: "{{ inst_ha }}"
+   enabled: yes
+
+- name: Start Load balacer serivice
+  service:
+   name: "{{ inst_ha }}"
+   state: started
+
+- name: Configure {{ inst_ha }}
+  template:
+   src: haproxy.cfg.j2
+   dest: /etc/haproxy/haproxy.cfg
+  notify: restart {{ inst_ha }}

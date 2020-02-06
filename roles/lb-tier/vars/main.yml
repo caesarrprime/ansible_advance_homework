@@ -1,2 +1,4 @@
 ---
 # vars file for lb-tier
+
+inst_ha: haproxy

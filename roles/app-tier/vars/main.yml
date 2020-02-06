@@ -1,2 +1,4 @@
 ---
 # vars file for app-tier
+inst_tom: tomcat
+tomcat_web_root: /usr/share/tomcat/webapps/ROOT
