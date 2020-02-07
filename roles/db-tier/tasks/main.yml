@@ -1,19 +1,22 @@
 ---
-# tasks file for db-tier
-- name: install {{ possgr }} database
+- name: install postgres
   yum:
     name: postgresql-server
     state: latest
-  notify: enable {{ possgr }} at boot
- 
-# only run the next 2 tasks once!
-- name: initilize postgres database
-  command: postgresql-setup initdb
 
-- name: initilize postgres some more
-  command: chkconfig postgresql on     
-
-- name: start postgress service
+- name: enable apache at boot
   service:
-    name: "{{ possgr }}"
+    name: postgresql
+    enabled: yes
+
+- name: initialize postgres
+  shell: 
+    postgresql-setup initdb
+  args:
+    creates: /var/lib/pgsql/data/PG_VERSION
+  # become: true
+
+- name: start postgres
+  service:
+    name: postgresql.service
     state: started

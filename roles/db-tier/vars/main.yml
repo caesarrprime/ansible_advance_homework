@@ -1,3 +1,2 @@
 ---
 # vars file for db-tier
-possgr: postgresql.service
