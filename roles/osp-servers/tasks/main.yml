@@ -40,6 +40,14 @@
     cloud: ospcloud
     region_name: RegionOne
   register: r_os_servers
+  
+- name: start Open Stack instance
+  os_server_actions:
+   cloud: ospcloud
+   name: "{{ item.value.name }}"
+   action: start
+   wait: yes
+  with_dict: "{{ osp_servers }}"
 
 - name: Wait for server to be available
   wait_for:
